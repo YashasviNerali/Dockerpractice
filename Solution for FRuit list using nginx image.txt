@@ -1,0 +1,25 @@
+$ mkdir static
+$ cd static
+#below add all fruits from git fruit.json file
+$ vi fruit.json 
+$ cd ..
+$ pwd
+/home/scrapbook/tutorial
+# add all deatils of nginx file
+$ vi nginx.conf
+#create docker file with all steps as mentioned
+$ vi Dockerfile
+$ cat Dockerfile
+FROM  NGINX:1.15.8
+ADD static/fruit.json /usr/share/nginx/html/
+ADD nginx.conf /etc/nginx/
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+
+$ docker build -t fruit-list:1.0.0 .
+Successfully built 7a1b48d5c954
+Successfully tagged fruit-list:1.0.0
+$ docker run --name fruit-list -d -p 8080:80 fruit-list:1.0.0
+97815b28a48ab9b132bfe47fecf3
+-------------verified by using link with port 8080 via katakoda
+final step - curl localhost:8080 will get all fruits displayed
